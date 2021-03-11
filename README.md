@@ -41,7 +41,7 @@ An alternate selection of character sets, intended to help reduce manual transcr
 - number_set = '234679'
 - special_set = ' !"#*+-./:=?@^_|'
 
-You can puch a bit beyond these suggested maximum values, but the farther you go, the more often this programm will run into permutational dead-ends. Code has been added to allow this program to break out of these situations and attempt to proceed normally.
+You can push a bit beyond these suggested maximum values, but the farther you go, the more often this programm will run into permutational dead-ends. Code has been added to allow this program to break out of these situations and attempt to proceed normally.
 
 ## How to Use
 
