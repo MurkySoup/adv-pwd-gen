@@ -5,7 +5,7 @@
 """
 A fine selection of high-quality, barrel-aged, non-gmo, organic,
 vegan, cruelty-free, gluten-free passwords-- just like mom used to make!
-now with shock-absorbing infinite-loop potection!
+now with shock-absorbing infinite-loop protection!
 
 Version 0.6-alpha (do not distribute) by Rick Pelletier, 24 June 2019
 Last update: 11 March 2021
