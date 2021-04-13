@@ -8,7 +8,7 @@ vegan, cruelty-free, gluten-free passwords-- just like mom used to make!
 now with shock-absorbing infinite-loop protection!
 
 Version 0.6-alpha (do not distribute) by Rick Pelletier, 24 June 2019
-Last update: 11 March 2021
+Last update: 13 April 2021
 
 Selection rules for "perfect" passwords:
 - 16 characters minimum (more is always better)
@@ -24,13 +24,6 @@ Password acceptance criteria:
 - Must not have consecutive numbers (like "15")
 - Must not have consecutive special characters (like "$*")
 - Must not have repeating characters (case insensitive, like "A" and "a" in the same password)
-
-
-
-upper_set = 'ADEFGHJKLMNPRTUW'
-lower_set = 'abdefghijkmnpqrstuwy'
-number_set = '234679'
-special_set = ' !"#*+-./:=?@^_|'
 """
 
 
