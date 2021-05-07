@@ -3,12 +3,12 @@
 
 
 """
-A fine selection of high-quality, barrel-aged, non-gmo, organic,
+Gnerates a fine selection of high-quality, barrel-aged, non-gmo, organic,
 vegan, cruelty-free, gluten-free passwords-- just like mom used to make!
-now with shock-absorbing infinite-loop protection!
+now new and improvewd with shock-absorbing infinite-loop protection!
 
-Version 0.6-alpha (do not distribute) by Rick Pelletier, 24 June 2019
-Last update: 13 April 2021
+Version 0.6.1-alpha (do not distribute) by Rick Pelletier, 24 June 2019
+Last update: 07 may 2021
 
 Selection rules for "perfect" passwords:
 - 16 characters minimum (more is always better)
@@ -24,6 +24,8 @@ Password acceptance criteria:
 - Must not have consecutive numbers (like "15")
 - Must not have consecutive special characters (like "$*")
 - Must not have repeating characters (case insensitive, like "A" and "a" in the same password)
+
+see: http://www.passwordmeter.com/
 """
 
 
@@ -62,6 +64,7 @@ def generate_password(pwd_len):
     if counter > (pwd_len * 100): # force break-out if we appear to hit a permutational dead-end
       return False
 
+    # logic tree for determining 'next' character
     if rule_check(upper_set, pwd[-1]):
       candidate = generate_character(lower_set + number_set + special_set)
 
@@ -78,6 +81,7 @@ def generate_password(pwd_len):
       counter += 1
       continue
 
+    # build password string
     pwd += candidate
 
   return pwd
@@ -86,26 +90,32 @@ def generate_password(pwd_len):
 if __name__ == '__main__':
   system_random = random.SystemRandom() # no need for seed()
 
-  # functional max value for 'pwd_len' is 48 when using this character set
+  """
+  a full chcaracter set intended to allow for the most complex password possible
+  functional max value for 'pwd_len' is 48 when using this character set
+  """
+
+  """
   upper_set = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
   lower_set = list('abcdefghijklmnopqrstuvwxyz')
   number_set = list('0123456789')
   special_set = list('~!@#$%^&*()-_=+[];:,.<>/?\|')
+  """
 
   """
-  # An alternate selection of character sets, intended to help reduce manual transcription
-  # errors, although this will reduce the overall premutation pool a bit.
-  # functional max value for 'pwd_len' is 34 when using this character set
+  An alternate selection of character sets, intended to help reduce manual transcription
+  errors, although this will reduce the overall premutation pool a bit.
+  functional max value for 'pwd_len' is 34 when using this character set
+  """
 
   upper_set = 'ADEFGHJKLMNPRTUW'
   lower_set = 'abdefghijkmnpqrstuwy'
   number_set = '234679'
-  special_set = ' !"#*+-./:=?@^_|'
-  """
+  special_set = '!"#*+-./:=?@^_|'
 
   working_set = upper_set + lower_set + number_set + special_set
 
-  pwd_len = 32;
+  pwd_len = 24;
   pwd_count = 16;
   counter = 0
 
@@ -113,6 +123,7 @@ if __name__ == '__main__':
     pwd = generate_password(pwd_len)
 
     if pwd:
+      # display password string, base64 version of password string and sha256 hash based on password string
       print(f'{pwd}  {b64_password(pwd)}  {hash_password(pwd)}')
       counter += 1
 
