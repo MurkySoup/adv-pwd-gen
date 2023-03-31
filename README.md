@@ -44,9 +44,9 @@ You can push a bit beyond these suggested maximum values, but the farther you go
 
 ## How to Use
 
-Clone this repo and run this one script contained within. There is no setup, installation or interconnect to anything else-- it's a self-contained program. At present, there is no command-line interface, and adjusting this programs behavior means making changes to the source code directly.
+Clone this repo and run this one script contained within. There is no setup, installation or interconnect to anything else-- it's a self-contained program. At present, there is no command-line interface, and adjusting this program's behavior means making changes to the source code directly.
 
-You can test password (in a more general sense) using this link: http://www.passwordmeter.com/
+You can test passwords (in a more general sense) using this link: http://www.passwordmeter.com/
 
 ## Built With
 
