@@ -7,7 +7,7 @@ My personal password generation tool.
 
 ## Prerequisites
 
-Requires Python 3.x (preferrably 3.6+) and uses the following (entirely standard) libraries:
+Requires Python 3.x (preferrably 3.7+) and uses the following (entirely standard) libraries:
 * sys
 * random
 * string
@@ -18,20 +18,19 @@ Requires Python 3.x (preferrably 3.6+) and uses the following (entirely standard
 
 This program generates passwords that are intended to be highly resistant to various attacks. While random generation is at the core, there are rules to be followed:
 
-- 16 character minimum (more is always better)
+- 16 characters minimum (but more is always better)
 - Must use at least one character from all of the following categories:
-  - Upppercase letters ( "ABCDEFGHIJKLMNOPQRSTUVWXYZ" )
-  - Lowercase letters ( "abcdefghijklmnopqrstuvwxyz" )
-  - Numbers ( "0123456789" )
-  - Special characters ( "~!@#$%^&*()-_=+[];:,.<>/?\|" )
+- Must use at least one upppercase letters (example character set: "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+- Must use at least one lowercase letters (example character set: "abcdefghijklmnopqrstuvwxyz")
+- Must use at least one numbers (example character set: "0123456789")
+- Must use at least one special characters (example character set:  "~!@#$%^&*()-_=+[];:,.<>/?\|")
 
 Password acceptance criteria:
-- Must not have consecutive uppercase letters (like "AZ")
-- Must not have consecutive lowercase letters (like "qr")
-- Must not have consecutive numbers (like "15")
-- Must not have consecutive special characters (like "$*")
-- Must not have repeating characters (case insensitive, like "A" and "a" in the same password)
-
+- Must not have consecutive uppercase letters (example: "AZ")
+- Must not have consecutive lowercase letters (example: "qr")
+- Must not have consecutive numbers (example: "15")
+- Must not have consecutive special characters (example" "$*")
+- Must not have repeating characters (this is case insensitive, example: "A" and "a" in the same password)
 This allows for a functional maximum password length of 48 characters.
 
 An alternate selection of character sets, intended to help reduce manual transcription errors, although this will reduce the overall premutation pool a bit. The functional maximum password length is 34 when using this character set.
@@ -41,7 +40,7 @@ An alternate selection of character sets, intended to help reduce manual transcr
 - number_set = '234679'
 - special_set = ' !"#*+-./:=?@^_|'
 
-You can push a bit beyond these suggested maximum values, but the farther you go, the more often this programm will run into permutational dead-ends. Code has been added to allow this program to break out of these situations and attempt to proceed normally.
+You can push a bit beyond these suggested maximum values, but the farther you go, the more often this programm will run into permutational dead-ends. This program has been structured to prevent these situations.
 
 ## How to Use
 
