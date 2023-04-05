@@ -3,54 +3,29 @@
 
 
 """
-Generates a fine selection of high-quality, barrel-aged, non-GMO, organic, vegan, cruelty-free,
-gluten-free, pesticide-free, hormone-free, grass-fed, free range, sustainable passwords.
-Now new and improvewd with shock-absorbing infinite-loop protection!
+Generates a fine selection of high-quality, barrel-aged, non-GMO, organic, vegan,
+hormone-free, grass-fed, free-range, sustainable passwords. New and improved,
+shock-absorbing infinite-loop protection provided at no additional charge!
 
-Version 0.7-Alpha (Do Not Distribute) by Rick Pelletier, 24 June 2019
-Last update: 31 March 2023
+Version 0.8.2-Alpha (Do Not Distribute) by Rick Pelletier, 24 June 2019
+Last update: 05 April 2023
 
 Selection rules for passwords:
-- 16 characters minimum (but more is always better)
-- Must use at least one character from all of the following categories:
-- Must use at least one upppercase letters (example character set: "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-- Must use at least one lowercase letters (example character set: "abcdefghijklmnopqrstuvwxyz")
-- Must use at least one numbers (example character set: "0123456789")
-- Must use at least one special characters (example character set:  "~!@#$%^&*()-_=+[];:,.<>/?\|")
+- 16 characters minimum (but more is always better).
+- Must use at least one upppercase letter (example character set: "ABCDEFGHIJKLMNOPQRSTUVWXYZ").
+- Must use at least one lowercase letter (example character set: "abcdefghijklmnopqrstuvwxyz").
+- Must use at least one number (example character set: "0123456789").
+- Must use at least one special character (example character set:  "~!@#$%^&*()-_=+[];:,.<>/?\|").
 
 Password acceptance criteria:
-- Must not have consecutive uppercase letters (example: "AZ")
-- Must not have consecutive lowercase letters (example: "qr")
-- Must not have consecutive numbers (example: "15")
-- Must not have consecutive special characters (example" "$*")
-- Must not have repeating characters (this is case insensitive, example: "A" and "a" in the same password)
+- Must meet length requirement.
+- Must not have consecutive uppercase letters (example: "AZ").
+- Must not have consecutive lowercase letters (example: "qr").
+- Must not have consecutive numbers (example: "15").
+- Must not have consecutive special characters (example" "$*").
+- Must not have repeating characters (this is case insensitive, example: "A" and "a" in the same password).
 
 See: http://www.passwordmeter.com/
-
-Optimizations implemented in the version (for the curious):
-
-- Moved the constant character sets ('upper_set', 'lower_set', 'number_set', special_set' and 'working_set') outside
-  of the 'generate_password' function and make them global variables. This way, they are only initialized once and can
-  be reused across multiple function calls.
-
-- Used a list comprehension to generate the complete character set in 'working_set' instead of concatenating them with
-  '+.'. This can potentially be faster and more memory-efficient.
-
-- Replaced the 'rule_check' function with a set intersection operation. For example, instead of:
-  'if rule_check(upper_set, pwd[-1])', I can use 'if set(pwd[-1]).intersection(upper_set)'. Sets have constant time
-  complexity for membership tests, so this can be faster than looping through each character in the set.
-
-- Used a 'for' loop instead of a while loop in generate_password to avoid the risk of infinite loops. I can set a
-  maximum number of iterations to prevent the function from running too long (and into a permutational dead end).
-
-- Used 'join' instead of '+=' to concatenate strings in 'generate_password'. This can be more memory-efficient
-  since strings are immutable and '+=' creates a new string object each time.
-
-- Instead of checking for repeating characters with '(candidate.lower() in list(pwd))' or '(candidate.upper() in list(pwd))',
-  a set is used to keep track of the characters that have already been used in the password. Sets have constant
-  time complexity for membership tests and can improve performance for large passwords.
-
-- Reformatted code to PEP8-spec because I got tired of hearing people kvetch about it.
 """
 
 
@@ -62,18 +37,6 @@ import hashlib
 
 
 # Character sets
-
-"""
-An alternate selection of character sets, intended to help reduce manual transcription errors, although this will
-reduce the overall premutation pool a bit. Functional maximum value for 'pwd_len' is 34 when using these character
-sets:
-
-UPPER_SET = 'ADEFGHJKLMNPRTUW'
-LOWER_SET = 'abdefghijkmnpqrstuwy'
-NUMBER_SET = '234679'
-SPECIAL_SET = '!"#*+-./:=?@^_|'
-"""
-
 UPPER_SET = string.ascii_uppercase
 LOWER_SET = string.ascii_lowercase
 NUMBER_SET = string.digits
@@ -91,6 +54,30 @@ def hash_password(string):
 
 def generate_character(working_set):
     return random.choice(list(working_set))
+
+
+def acceptance_check(password:str):
+    uppercase_set = set(UPPER_SET)
+    lowercase_set = set(LOWER_SET)
+    number_set = set(NUMBER_SET)
+    special_set = set(SPECIAL_SET)
+
+    if len(password) < 16:
+        return False
+
+    if not uppercase_set.intersection(password):
+        return False
+
+    if not lowercase_set.intersection(password):
+        return False
+
+    if not number_set.intersection(password):
+        return False
+
+    if not special_set.intersection(password):
+        return False
+
+    return True
 
 
 def generate_password(pwd_len):
@@ -123,16 +110,21 @@ def generate_password(pwd_len):
 
     return False
 
+
 if __name__ == '__main__':
     random.seed()
-    pwd_len = 32
-    pwd_count = 25
+    pwd_len = 24
+    pwd_count = 24
     counter = 0
 
     while counter < pwd_count:
-        if (pwd := generate_password(pwd_len)):
-            print(f'{pwd}  {b64_password(pwd)}  {hash_password(pwd)}')
-            counter += 1
+        if pwd := generate_password(pwd_len):
+            if acceptance_check(pwd) == True:
+                print(f'{pwd}  {b64_password(pwd)}  {hash_password(pwd)}')
+                counter += 1
+
+            if counter > pwd_count * 100:
+               break
 
     sys.exit(0)
 else:
