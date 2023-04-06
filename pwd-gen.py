@@ -4,24 +4,22 @@
 
 """
 Generates a fine selection of high-quality, barrel-aged, non-GMO, organic, vegan,
-hormone-free, grass-fed, free-range, sustainable passwords. New and improved,
-shock-absorbing infinite-loop protection provided at no additional charge!
+hormone-free, grass-fed, free-range, environmentally sustainable passwords.
+New and improved, shock-absorbing infinite-loop protection is provided at no
+additional charge!
 
-Version 0.8.2-Alpha (Do Not Distribute) by Rick Pelletier, 24 June 2019
-Last update: 05 April 2023
+Version 0.8.3-Alpha (Do Not Distribute) by Rick Pelletier, 24 June 2019
+Last update: 06 April 2023
 
-Selection rules for passwords:
+Selection and acceptanace rules for passwords:
 - 16 characters minimum (but more is always better).
 - Must use at least one upppercase letter (example character set: "ABCDEFGHIJKLMNOPQRSTUVWXYZ").
-- Must use at least one lowercase letter (example character set: "abcdefghijklmnopqrstuvwxyz").
-- Must use at least one number (example character set: "0123456789").
-- Must use at least one special character (example character set:  "~!@#$%^&*()-_=+[];:,.<>/?\|").
-
-Password acceptance criteria:
-- Must meet length requirement.
 - Must not have consecutive uppercase letters (example: "AZ").
+- Must use at least one lowercase letter (example character set: "abcdefghijklmnopqrstuvwxyz").
 - Must not have consecutive lowercase letters (example: "qr").
+- Must use at least one number (example character set: "0123456789").
 - Must not have consecutive numbers (example: "15").
+- Must use at least one special character (example character set:  "~!@#$%^&*()-_=+[];:,.<>/?\|").
 - Must not have consecutive special characters (example" "$*").
 - Must not have repeating characters (this is case insensitive, example: "A" and "a" in the same password).
 
@@ -44,15 +42,15 @@ SPECIAL_SET = '~!@#$%^&*()-_=+[];:,.<>/?\\|'
 WORKING_SET = set(UPPER_SET + LOWER_SET + NUMBER_SET + SPECIAL_SET)
 
 
-def b64_password(string):
-    return base64.b64encode(string.encode('utf-8')).decode('utf-8')
+def b64_password(password:str):
+    return base64.b64encode(password.encode('utf-8')).decode('utf-8')
 
 
-def hash_password(string):
-    return hashlib.sha256(string.encode('utf-8')).hexdigest()
+def hash_password(password:str):
+    return hashlib.sha256(password.encode('utf-8')).hexdigest()
 
 
-def generate_character(working_set):
+def generate_character(working_set:list):
     return random.choice(list(working_set))
 
 
@@ -80,7 +78,7 @@ def acceptance_check(password:str):
     return True
 
 
-def generate_password(pwd_len):
+def generate_password(pwd_len:int):
     pwd = generate_character(WORKING_SET)
     used_chars = set(pwd)
     max_iter = pwd_len * 100
