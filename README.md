@@ -48,9 +48,18 @@ You can push a bit beyond these suggested maximum values, but the farther you go
 
 ## How to Use
 
-Clone this repo and run this one script contained within. There is no setup, installation or interconnect to anything else-- it's a self-contained program. At present, there is no command-line interface, and adjusting this program's behavior means making changes to the source code directly.
+Clone this repo and run this one script contained within. There is no setup, installation or interconnect to anything else-- it's a self-contained program. A simple command line interface is present:
 
-You can test passwords (in a more general sense) using this link: http://www.passwordmeter.com/
+```
+usage: pwd-gen.py [-h] [-c COUNT] [-l LENGTH]
+
+options:
+  -h, --help                    show this help message and exit
+  -c COUNT, --count COUNT       number of passwords to generate
+  -l LENGTH, --length LENGTH    length of passwords to generate
+```
+
+You can test passwords (in a more general sense) using this link: http://www.passwordmeter.com/ (there are others, of course).
 
 ## Built With
 
