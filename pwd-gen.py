@@ -8,8 +8,8 @@ hormone-free, grass-fed, free-range, environmentally sustainable passwords.
 New and improved, shock-absorbing infinite-loop protection is provided at no
 additional charge!
 
-Version 0.8.3-Alpha (Do Not Distribute) by Rick Pelletier, 24 June 2019
-Last update: 06 April 2023
+Version 0.9.4-Alpha (Do Not Distribute) by Rick Pelletier, 24 June 2019
+Last update: 07 April 2023
 
 Selection and acceptanace rules for passwords:
 - 16 characters minimum (but more is always better).
@@ -32,13 +32,21 @@ import random
 import string
 import base64
 import hashlib
+import argparse
 
 
-# Character sets
+# Standard character sets
 UPPER_SET = string.ascii_uppercase
 LOWER_SET = string.ascii_lowercase
 NUMBER_SET = string.digits
 SPECIAL_SET = '~!@#$%^&*()-_=+[];:,.<>/?\\|'
+
+# Reduced character sets
+#UPPER_SET = 'ADEFGHJKLMNPRTUW'
+#LOWER_SET = 'abdefghijkmnpqrstuwy'
+#NUMBER_SET = '234679'
+#SPECIAL_SET = '!"#*+-./:=?@^_|'
+
 WORKING_SET = set(UPPER_SET + LOWER_SET + NUMBER_SET + SPECIAL_SET)
 
 
@@ -110,19 +118,24 @@ def generate_password(pwd_len:int):
 
 
 if __name__ == '__main__':
-    random.seed()
-    pwd_len = 24
-    pwd_count = 24
-    counter = 0
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", "--count", type=int, help='Number of passwords to generate', default=1, required=False)
+    parser.add_argument("-l", "--length", type=int, help='Length of passwords to generate', default=24, required=False)
+    args = parser.parse_args()
 
-    while counter < pwd_count:
-        if pwd := generate_password(pwd_len):
+    random.seed()
+
+    for k in range(args.count):
+        break_counter = 0
+
+        if pwd := generate_password(args.length):
             if acceptance_check(pwd) == True:
                 print(f'{pwd}  {b64_password(pwd)}  {hash_password(pwd)}')
-                counter += 1
+            else:
+                break_counter += 1
 
-            if counter > pwd_count * 100:
-               break
+            if break_counter > args.count * 100:
+               continue
 
     sys.exit(0)
 else:

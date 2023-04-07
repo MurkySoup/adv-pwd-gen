@@ -1,4 +1,5 @@
 # adv-pwd-gen
+
 adv-pwd-gen (advanced password generator)
 
 ## Description
@@ -32,14 +33,16 @@ Password acceptance criteria:
 - Must not have consecutive special characters (example" "$*").
 - Must not have repeating characters (this is case insensitive, example: "A" and "a" in the same password).
 
-This allows for a functional maximum password length of 48 characters.
+This allows for a functional maximum password length of roughly 88 characters.
 
-Below is an alternate selection of character sets, intended to help reduce manual transcription errors, although this will reduce the overall premutation pool a bit. The functional maximum password length is 34 when using this character set.
+Below is an alternate selection of character sets, intended to help reduce manual transcription errors, although this will reduce the overall premutation pool a bit. The functional maximum password length is roughly 56 when using this character set.
 
-- upper_set = 'ADEFGHJKLMNPRTUW'
-- lower_set = 'abdefghijkmnpqrstuwy'
-- number_set = '234679'
-- special_set = ' !"#*+-./:=?@^_|'
+```
+UPPER_SET = 'ADEFGHJKLMNPRTUW'
+LOWER_SET = 'abdefghijkmnpqrstuwy'
+NUMBER_SET = '234679'
+SPECIAL_SET = '!"#*+-./:=?@^_|'
+```
 
 You can push a bit beyond these suggested maximum values, but the farther you go, the more often this program will run into permutational dead-ends. This program has been structured to prevent these situations.
 
