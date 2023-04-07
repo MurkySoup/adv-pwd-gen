@@ -8,7 +8,7 @@ hormone-free, grass-fed, free-range, environmentally sustainable passwords.
 New and improved, shock-absorbing infinite-loop protection is provided at no
 additional charge!
 
-Version 0.9.4-Alpha (Do Not Distribute) by Rick Pelletier, 24 June 2019
+Version 0.9.5-Alpha (Do Not Distribute) by Rick Pelletier, 24 June 2019
 Last update: 07 April 2023
 
 Selection and acceptanace rules for passwords:
@@ -119,8 +119,8 @@ def generate_password(pwd_len:int):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("-c", "--count", type=int, help='Number of passwords to generate', default=1, required=False)
-    parser.add_argument("-l", "--length", type=int, help='Length of passwords to generate', default=24, required=False)
+    parser.add_argument("-c", "--count", type=int, help='number of passwords to generate', default=1, required=False)
+    parser.add_argument("-l", "--length", type=int, help='length of passwords to generate', default=24, required=False)
     args = parser.parse_args()
 
     random.seed()
