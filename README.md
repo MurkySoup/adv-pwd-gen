@@ -33,9 +33,9 @@ Password acceptance criteria:
 - Must not have consecutive special characters (example" "$*").
 - Must not have repeating characters (this is case insensitive, example: "A" and "a" in the same password).
 
-This allows for a functional maximum password length of roughly 88 characters.
+This allows for a functional maximum password length of 89 characters (the sum of the sets of characters).
 
-Below is an alternate selection of character sets, intended to help reduce manual transcription errors, although this will reduce the overall premutation pool a bit. The functional maximum password length is roughly 56 when using this character set.
+Below is an alternate selection of character sets, intended to help reduce manual transcription errors, although this will reduce the overall premutation pool a bit. The functional maximum password length is 56 when using this character set.
 
 ```
 UPPER_SET = 'ADEFGHJKLMNPRTUW'
@@ -44,7 +44,9 @@ NUMBER_SET = '234679'
 SPECIAL_SET = '!"#*+-./:=?@^_|'
 ```
 
-You can push a bit beyond these suggested maximum values, but the farther you go, the more often this program will run into permutational dead-ends. This program has been structured to prevent these situations.
+Attempting to push beyond these maximum length values results in permutational dead-ends that cannot be resolved. This program has been structured to prevent these situations by enforcing length limits.
+
+You can define your own character sets, if you like.
 
 ## How to Use
 

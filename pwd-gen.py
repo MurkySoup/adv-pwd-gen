@@ -5,10 +5,8 @@
 """
 Generates a fine selection of high-quality, barrel-aged, non-GMO, organic, vegan,
 hormone-free, grass-fed, free-range, environmentally sustainable passwords.
-New and improved, shock-absorbing infinite-loop protection is provided at no
-additional charge!
 
-Version 0.9.5-Alpha (Do Not Distribute) by Rick Pelletier, 24 June 2019
+Version 0.9.6-Alpha (Do Not Distribute) by Rick Pelletier, 24 June 2019
 Last update: 07 April 2023
 
 Selection and acceptanace rules for passwords:
@@ -48,6 +46,7 @@ SPECIAL_SET = '~!@#$%^&*()-_=+[];:,.<>/?\\|'
 #SPECIAL_SET = '!"#*+-./:=?@^_|'
 
 WORKING_SET = set(UPPER_SET + LOWER_SET + NUMBER_SET + SPECIAL_SET)
+MAX_PWD_LENGTH = len(WORKING_SET)
 
 
 def b64_password(password:str):
@@ -123,18 +122,18 @@ if __name__ == '__main__':
     parser.add_argument("-l", "--length", type=int, help='length of passwords to generate', default=24, required=False)
     args = parser.parse_args()
 
+    output_counter = 0
     random.seed()
 
-    for k in range(args.count):
-        break_counter = 0
+    if args.length > MAX_PWD_LENGTH:
+        args.length = MAX_PWD_LENGTH
 
+    while output_counter < args.count:
         if pwd := generate_password(args.length):
             if acceptance_check(pwd) == True:
                 print(f'{pwd}  {b64_password(pwd)}  {hash_password(pwd)}')
+                output_counter += 1
             else:
-                break_counter += 1
-
-            if break_counter > args.count * 100:
                continue
 
     sys.exit(0)
