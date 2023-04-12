@@ -3,14 +3,14 @@
 
 
 """
-Generates a fine selection of high-quality, barrel-aged, non-GMO, organic, vegan,
+Generates a hand-picked selection of high-quality, barrel-aged, non-GMO, organic, vegan,
 hormone-free, grass-fed, free-range, environmentally sustainable passwords.
 
-Version 0.9.6-Alpha (Do Not Distribute) by Rick Pelletier, 24 June 2019
-Last update: 07 April 2023
+Version 0.9.8-Alpha (Do Not Distribute) by Rick Pelletier, 24 June 2019
+Last update: 12 April 2023
 
 Selection and acceptanace rules for passwords:
-- 16 characters minimum (but more is always better).
+- 16 characters minimum length (but more is always better).
 - Must use at least one upppercase letter (example character set: "ABCDEFGHIJKLMNOPQRSTUVWXYZ").
 - Must not have consecutive uppercase letters (example: "AZ").
 - Must use at least one lowercase letter (example character set: "abcdefghijklmnopqrstuvwxyz").
@@ -46,6 +46,7 @@ SPECIAL_SET = '~!@#$%^&*()-_=+[];:,.<>/?\\|'
 #SPECIAL_SET = '!"#*+-./:=?@^_|'
 
 WORKING_SET = set(UPPER_SET + LOWER_SET + NUMBER_SET + SPECIAL_SET)
+MIN_PWD_LENGTH = 16
 MAX_PWD_LENGTH = len(WORKING_SET)
 
 
@@ -59,30 +60,6 @@ def hash_password(password:str):
 
 def generate_character(working_set:list):
     return random.choice(list(working_set))
-
-
-def acceptance_check(password:str):
-    uppercase_set = set(UPPER_SET)
-    lowercase_set = set(LOWER_SET)
-    number_set = set(NUMBER_SET)
-    special_set = set(SPECIAL_SET)
-
-    if len(password) < 16:
-        return False
-
-    if not uppercase_set.intersection(password):
-        return False
-
-    if not lowercase_set.intersection(password):
-        return False
-
-    if not number_set.intersection(password):
-        return False
-
-    if not special_set.intersection(password):
-        return False
-
-    return True
 
 
 def generate_password(pwd_len:int):
@@ -125,16 +102,17 @@ if __name__ == '__main__':
     output_counter = 0
     random.seed()
 
+    if args.length < MIN_PWD_LENGTH:
+        print(f'Warning: Use of passwords shorter than {MIN_PWD_LENGTH} characters in length are strongly discouraged!')
+        print()
+
     if args.length > MAX_PWD_LENGTH:
         args.length = MAX_PWD_LENGTH
 
-    while output_counter < args.count:
-        if pwd := generate_password(args.length):
-            if acceptance_check(pwd) == True:
-                print(f'{pwd}  {b64_password(pwd)}  {hash_password(pwd)}')
-                output_counter += 1
-            else:
-               continue
+    for k in range(args.count):
+        pwd = generate_password(args.length)
+        print(f'{pwd}  {b64_password(pwd)}  {hash_password(pwd)}')
+
 
     sys.exit(0)
 else:
