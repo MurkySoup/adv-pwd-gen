@@ -53,12 +53,13 @@ You can define your own character sets, if you like.
 Clone this repo and run this one script contained within. There is no setup, installation or interconnect to anything else-- it's a self-contained program. A simple command line interface is present:
 
 ```
-usage: pwd-gen.py [-h] [-c COUNT] [-l LENGTH]
+usage: pwd-gen.py [-h] [-c COUNT] [-l LENGTH] [-s]
 
 options:
   -h, --help                    show this help message and exit
   -c COUNT, --count COUNT       number of passwords to generate
   -l LENGTH, --length LENGTH    length of passwords to generate
+  -s, --hash                    lnclude password hash (sha256)
 ```
 
 You can test passwords (in a more general sense) using this link: http://www.passwordmeter.com/ (there are others, of course).
