@@ -12,7 +12,6 @@ Requires Python 3.x (preferrably 3.7+) and uses the following (entirely standard
 * sys
 * random
 * string
-* base64
 * hashlib
 
 ## Overview of this Program
@@ -59,7 +58,7 @@ options:
   -h, --help                    show this help message and exit
   -c COUNT, --count COUNT       number of passwords to generate
   -l LENGTH, --length LENGTH    length of passwords to generate
-  -s, --hash                    lnclude password hash (sha256)
+  -s, --hash                    include password hash (sha256)
 ```
 
 You can test passwords (in a more general sense) using this link: http://www.passwordmeter.com/ (there are others, of course).
