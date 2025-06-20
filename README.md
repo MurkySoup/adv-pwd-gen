@@ -61,6 +61,38 @@ options:
   -s, --hash                    include password hash (sha256)
 ```
 
+Sample output:
+```
+$ ./pwd-gen.py -c 4 -l 16
+
+w!v6[I?H\0;Q^8]W
+2IfP=hWgT$8t(eZm
+hU0Wn%Bd\q]u|A8p
+<Z2-5Xg|x?T>wR3G
+```
+
+A simple password analysis tool has also been provided, allowing for arbitrary classification of password samples:
+
+```
+usage: pwd-analyzer.py [-h] -s STRING
+
+options:
+  -h, --help                    show this help message and exit
+  -s STRING, --string STRING    password string to analayze
+```
+
+Sample output:
+```
+$ ./pwd-analyzer.py --string '!Pa55w0rd'
+
+{
+  "password": "!Pa55w0rd",
+  "risk_class": 2,
+  "risk_label": "High Risk",
+  "risk_score": 80
+}
+```
+
 You can test passwords (in a more general sense) using this link: http://www.passwordmeter.com/ (there are others, of course).
 
 ## Built With
